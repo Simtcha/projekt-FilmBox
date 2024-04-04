@@ -118,18 +118,6 @@ const filmy = [
 	},
 ]
 
-/*
-const zvyrazneniHvezdicek = (number) => {
-	const hvezdicky = document.querySelectorAll('.fa-star')
-	hvezdicky.forEach((hvezdicka) => {
-
-})
-}
-
-const stars = document.querySelector('.fa-star')
-stars.addEventListener('click', zvyrazneniHvezdicek()) */
-
-
 
 const filmId = window.location.hash.slice(1)
 const filmData = filmy.find((item) => item.id === filmId)
@@ -153,31 +141,52 @@ const sloveso = (pocetDni) => {
 let novyKonec = sloveso(rozdilVdatu)
 
 
-document.addEventListener('DOMContentLoaded', () => {
-const detailFilmu = document.querySelector('#detail-filmu')
+const detailFilmu = document.querySelector('.col-md-5')
 detailFilmu.innerHTML += `
-
-<div class="row g-0">
-<div class="col-md-5">
 	<img
 		src=${filmData.plakat.url}
 		alt="plakát"
 		class="img-fluid rounded-start"
 		width=${filmData.sirka}
 		height=${filmData.vyska}
-	/>
-</div>
-<div class="col-md-7">
-	<div class="card-body">
-		<h5 class="card-title">${filmData.nazev}</h5>
-		<p class="card-text">${filmData.popis}</p>
-		<p class="card-text">
+	/>`
+
+const detailFilmu2 = document.querySelector('.card-body')
+detailFilmu2.innerHTML += `
+<h5 class="card-title">${filmData.nazev}</h5>
+<p class="card-text">${filmData.popis}</p>
+<p class="card-text">
 			<small class="text-muted" id="premiera"
 				>Premiéra <strong>${lepsiDatum}</strong>, což ${novyKonec}
 				</small
 			>
-		</p>` })
+		</p>
+`
 
+
+//hvezdicky
+const selectStars = (num) => {
+    const stars = document.querySelectorAll('.fa-star')
+
+    stars.forEach((star, index) => {
+        if (index < num) {
+            star.classList.remove('far')
+            star.classList.add('fas')
+        } else {
+            star.classList.remove('fas')
+            star.classList.add('far')
+        }
+    })
+}
+
+//hvezdicky eventlistener
+const stars = document.querySelectorAll('.fa-star');
+stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+        const counter = index + 1
+        selectStars(counter)
+    })
+})
 
 
 
