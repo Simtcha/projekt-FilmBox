@@ -118,20 +118,23 @@ const filmy = [
 	},
 ]
 
-
+// nalezeni id filmu k zobrazeni spravnych udaju na stranku o detailu filmu
 const filmId = window.location.hash.slice(1)
 const filmData = filmy.find((item) => item.id === filmId)
 
-
+//zobrazeni hezciho formatu data premiery a vypocet datumu od premiery k dnesnimu dni
 let lepsiDatum = dayjs(filmData.premiera).format('D. M. YYYY')
-let rozdilVdatu = dayjs(filmData.premiera).diff(dayjs(), 'days')
+let rozdilVdatu = dayjs(filmData.premiera).diff(dayjs(), 'days') //je cele cislo
 
 
 const sloveso = (pocetDni) => {
-	if (pocetDni < 0) {
+	
+    if (pocetDni === -1) {
+	   return document.innerHTML = `bylo včera.`
+	} else if (pocetDni < 0) {
 		return document.innerHTML = `bylo před ${pocetDni} dny.`
 	} else if (pocetDni === 1) {
-		return document.innerHTML = `bude za ${pocetDni} den.`
+		return document.innerHTML = `bude zítra.`
 	} else if (pocetDni > 0) {
 		return document.innerHTML = `bude za ${pocetDni} dní.`
 	} else {
@@ -140,7 +143,7 @@ const sloveso = (pocetDni) => {
 }
 let novyKonec = sloveso(rozdilVdatu)
 
-
+//pokus o to co nejvic rozdekat film.html, abych nezmenila strukturu stranky, ale stejne se mi to pusune nahoru nad popis
 const detailFilmu = document.querySelector('.col-md-5')
 detailFilmu.innerHTML += `
 	<img
@@ -151,6 +154,8 @@ detailFilmu.innerHTML += `
 		height=${filmData.vyska}
 	/>`
 
+
+//pokus o to co nejvic rozdekat film.html, abych nezmenila strukturu stranky, ale stejne se mi to pusune nahoru nad popis
 const detailFilmu2 = document.querySelector('.card-body')
 detailFilmu2.innerHTML += `
 <h5 class="card-title">${filmData.nazev}</h5>
@@ -191,7 +196,7 @@ stars.forEach((star, index) => {
 
 
 
-/*
+/* zbytek html, ktery pripojim k detailFilmu2.innerHTML pokud nenajdu jinou moznost jak nezrusit poradi prvku
 		<h6>Hodnocení</h6>
 		<div class="stars">
 			<button
