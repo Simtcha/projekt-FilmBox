@@ -195,6 +195,29 @@ stars.forEach((star, index) => {
 
 
 
+//poznamka cervene ramecky
+const formular = document.querySelector('#note-form')
+const textPole = document.querySelector('#message-input')
+const check = document.querySelector('#terms-checkbox')
+
+const zprava = (event) => {
+	event.preventDefault()
+
+	if (!check.checked) {
+		check.classList.add('is-invalid')
+		check.focus()
+	} else if (textPole.value === "") {
+		textPole.classList.add('is-invalid')
+		textPole.focus()	
+	} else {
+		textPole.classList.remove('is-invalid')
+		check.classList.remove('is-invalid')
+		formular.innerHTML = `<p class="card-text">${textPole.value}</p>`
+	}
+}
+
+formular.addEventListener('submit', zprava)
+
 
 /* zbytek html, ktery pripojim k detailFilmu2.innerHTML pokud nenajdu jinou moznost jak nezrusit poradi prvku
 		<h6>Hodnocení</h6>
