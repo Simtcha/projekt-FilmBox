@@ -155,7 +155,7 @@ detailFilmu.innerHTML += `
 	/>`
 
 
-//pokus o to co nejvic rozdekat film.html, abych nezmenila strukturu stranky, ale stejne se mi to pusune nahoru nad popis
+//pokus o to co nejvic rozlozit film.html, abych nezmenila strukturu stranky, ale stejne se mi to posune nahoru nad popis
 const detailFilmu2 = document.querySelector('.card-body')
 detailFilmu2.innerHTML += `
 <h5 class="card-title">${filmData.nazev}</h5>
@@ -163,63 +163,9 @@ detailFilmu2.innerHTML += `
 <p class="card-text">
 			<small class="text-muted" id="premiera"
 				>Premiéra <strong>${lepsiDatum}</strong>, což ${novyKonec}
-				</small
-			>
+				</small>
+			
 		</p>
-`
-
-
-//hvezdicky
-const selectStars = (num) => {
-    const stars = document.querySelectorAll('.fa-star')
-
-    stars.forEach((star, index) => {
-        if (index < num) {
-            star.classList.remove('far')
-            star.classList.add('fas')
-        } else {
-            star.classList.remove('fas')
-            star.classList.add('far')
-        }
-    })
-}
-
-//hvezdicky eventlistener
-const stars = document.querySelectorAll('.fa-star');
-stars.forEach((star, index) => {
-    star.addEventListener('click', () => {
-        const counter = index + 1
-        selectStars(counter)
-    })
-})
-
-
-
-//poznamka cervene ramecky
-const formular = document.querySelector('#note-form')
-const textPole = document.querySelector('#message-input')
-const check = document.querySelector('#terms-checkbox')
-
-const zprava = (event) => {
-	event.preventDefault()
-
-	if (!check.checked) {
-		check.classList.add('is-invalid')
-		check.focus()
-	} else if (textPole.value === "") {
-		textPole.classList.add('is-invalid')
-		textPole.focus()	
-	} else {
-		textPole.classList.remove('is-invalid')
-		check.classList.remove('is-invalid')
-		formular.innerHTML = `<p class="card-text">${textPole.value}</p>`
-	}
-}
-
-formular.addEventListener('submit', zprava)
-
-
-/* zbytek html, ktery pripojim k detailFilmu2.innerHTML pokud nenajdu jinou moznost jak nezrusit poradi prvku
 		<h6>Hodnocení</h6>
 		<div class="stars">
 			<button
@@ -296,26 +242,55 @@ formular.addEventListener('submit', zprava)
 </div>
 </div>
 </div>
-</div>
-<div class="container-lg mt-5">
-			<div id="prehravac" class="player rounded shadow-4">
-				<video
-					controls
-					loop
-					preload="auto"
-					poster="https://user-images.githubusercontent.com/1045362/204167262-a16c4755-3d23-400e-b6b0-c9c242399ecf.jpg"
-					width="320"
-					height="180"
-				>
-					<source
-						src="https://user-images.githubusercontent.com/1045362/204137892-c6aee4cd-8cc1-44db-b076-71774d67c7b3.mp4"
-						type="video/mp4"
-					/>
-				</video>
-				<div class="player-controls">
-					<button type="button" class="play fas fa-play">Přehrát</button>
-					<button type="button" class="pause fas fa-pause">Pozastavit</button>
-					<time class="current-time">00:00</time>
-				</div>
-			</div>
-		</div> */
+</div>`
+
+
+//hvezdicky
+const selectStars = (num) => {
+    const stars = document.querySelectorAll('.fa-star')
+
+    stars.forEach((star, index) => {
+        if (index < num) {
+            star.classList.remove('far')
+            star.classList.add('fas')
+        } else {
+            star.classList.remove('fas')
+            star.classList.add('far')
+        }
+    })
+}
+
+//hvezdicky eventlistener
+const stars = document.querySelectorAll('.fa-star');
+stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
+        const counter = index + 1
+        selectStars(counter)
+    })
+})
+
+
+
+//poznamka cervene ramecky
+const formular = document.querySelector('#note-form')
+const textPole = document.querySelector('#message-input')
+const check = document.querySelector('#terms-checkbox')
+
+const zprava = (event) => {
+	event.preventDefault()
+
+	if (!check.checked) {
+		check.classList.add('is-invalid')
+		check.focus()
+	} else if (textPole.value === "") {
+		textPole.classList.add('is-invalid')
+		textPole.focus()	
+	} else {
+		textPole.classList.remove('is-invalid')
+		check.classList.remove('is-invalid')
+		formular.innerHTML = `<p class="card-text">${textPole.value}</p>`
+	}
+}
+
+formular.addEventListener('submit', zprava)
+
