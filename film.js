@@ -124,24 +124,25 @@ const filmData = filmy.find((item) => item.id === filmId)
 
 //zobrazeni hezciho formatu data premiery a vypocet datumu od premiery k dnesnimu dni
 let lepsiDatum = dayjs(filmData.premiera).format('D. M. YYYY')
-let rozdilVdatu = dayjs(filmData.premiera).diff(dayjs(), 'days') //je cele cislo
-
+let rozdilVdatu = dayjs(filmData.premiera).diff(dayjs(), 'days') //je cislo - rozdil dni
+console.log(rozdilVdatu)
 
 const sloveso = (pocetDni) => {
 	
     if (pocetDni === -1) {
 	   return document.innerHTML = `bylo včera.`
 	} else if (pocetDni < 0) {
-		return document.innerHTML = `bylo před ${pocetDni} dny.`
+		return document.innerHTML = `bylo před ${Math.abs(pocetDni)} dny.`
 	} else if (pocetDni === 1) {
 		return document.innerHTML = `bude zítra.`
-	} else if (pocetDni > 0) {
-		return document.innerHTML = `bude za ${pocetDni} dní.`
+	} else if (pocetDni === 0) {
+		return document.innerHTML = `je dnes`
 	} else {
-		return document.innerHTML = `je dnes.`
+		return document.innerHTML = `bude za ${pocetDni} dní.`
 	}
 }
 let novyKonec = sloveso(rozdilVdatu)
+//let novyKonec = sloveso(98)
 
 //pokus o to co nejvic rozdekat film.html, abych nezmenila strukturu stranky, ale stejne se mi to pusune nahoru nad popis
 const detailFilmu = document.querySelector('.col-md-5')
